@@ -36,7 +36,6 @@ sonar {
     property "sonar.projectKey", "gradle-demo"
     property "sonar.projectName", "gradle-demo"
     property "sonar.host.url", "http://localhost:9000"
-    property "sonar.token", "squ_b2e37ac9fa5c31bafec71f7ec0ed84382b930ea4"
     property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
   }
 }

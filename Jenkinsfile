@@ -16,7 +16,8 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                sh 'gradle sonar'
+                // Passing the token directly via command line to ensure authorization
+                sh 'gradle sonar -Dsonar.token=squ_b2e37ac9fa5c31bafec71f7ec0ed84382b930ea4'
             }
         }
         stage('Archive Artifact') {
