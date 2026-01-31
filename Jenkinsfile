@@ -2,8 +2,6 @@ pipeline {
     agent any
     environment {
         PATH = "/opt/gradle-8.5/bin:$PATH"
-        // This securely pulls the secret we just created in Jenkins
-        SONAR_AUTH_TOKEN = credentials('SONAR_TOKEN')
     }
     stages {
         stage('Checkout') {
@@ -18,8 +16,10 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                // Using the environment variable to pass the token
-                sh "gradle sonar -Dsonar.token=${SONAR_AUTH_TOKEN}"
+                withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+                    // We use the variable SONAR_TOKEN provided by Jenkins
+                    sh "gradle sonar -Dsonar.token=${SONAR_TOKEN}"
+                }
             }
         }
         stage('Archive Artifact') {
