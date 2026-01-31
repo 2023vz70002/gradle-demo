@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    // Missing Log4j dependencies added here
+    // These fix the compilation errors you had earlier
     implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
     implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
     
