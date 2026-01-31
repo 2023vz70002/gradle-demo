@@ -1,16 +1,19 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id "org.sonarqube" version "4.4.1.3373"
 }
+
+group = 'com.bits.mvn'
+version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
@@ -21,6 +24,17 @@ test {
 jacocoTestReport {
     dependsOn test
     reports {
+        xml.required = true
         html.required = true
     }
+}
+
+sonar {
+  properties {
+    property "sonar.projectKey", "gradle-demo"
+    property "sonar.projectName", "gradle-demo"
+    property "sonar.host.url", "http://localhost:9000"
+    property "sonar.token", "squ_b2e37ac9fa5c31bafec71f7ec0ed84382b930ea4"
+    property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+  }
 }

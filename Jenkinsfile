@@ -11,8 +11,12 @@ pipeline {
         }
         stage('Build & Test') {
             steps {
-                // Changed from 'test' to 'build' to ensure JAR creation
                 sh 'gradle clean build'
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                sh 'gradle sonar'
             }
         }
         stage('Archive Artifact') {
